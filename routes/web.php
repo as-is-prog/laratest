@@ -24,6 +24,13 @@ Route::get('project/create', function(){
     return view('createproject');
 });
 
+Route::get('product/register', function(){
+    return view('registproduct');
+});
+
+Route::get('project/search', function(){
+    return view('searchproject');
+});
 
 Auth::routes();
 

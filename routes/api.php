@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/project/create', function (Request $request) {
+Route::post('/project/create', 'ProjectController@create');
+
+Route::post('/product/register', function (Request $request) {
     return $request->input('name');
 });
+
+Route::post('/project/search', 'ProjectController@search');
