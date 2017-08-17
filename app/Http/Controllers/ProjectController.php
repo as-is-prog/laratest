@@ -42,7 +42,7 @@ class ProjectController extends Controller
          // do task when error
          return $e->getMessage();   // insert query
       }
-      return $request->input('name')."プロジェクトを作成しました。";
+      return view('resultmessage', ['message' => $request->input('name')."プロジェクトを作成しました。", 'link' => 'home']);
     }
 
     /**
