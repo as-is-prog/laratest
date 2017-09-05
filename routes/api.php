@@ -18,8 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/project/create', 'ProjectController@create');
-
 Route::post('/product/register', function (Request $request) {
     return $request->input('name');
 });

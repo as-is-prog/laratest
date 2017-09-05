@@ -21,7 +21,7 @@
                   @foreach ($projects as $project)
                   <ul>
                     <li>
-                      <h4>{{ $project->name }}</h4>
+                      <h4><a href="{{ '/project/'.$project->id }}">{{ $project->name }}</a></h4>
                       <p>{{ $project->outline }}</p>
                     </li>
                   </ul>

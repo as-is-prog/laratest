@@ -20,17 +20,23 @@ Route::get('link/list', function(){
     return view('link', ['links' => $links]);
 });
 
-Route::get('project/create', function(){
+Route::get('/project/create', function(){
     return view('createproject');
 });
 
-Route::get('product/register', function(){
+Route::post('/project/create', 'ProjectController@create');
+
+Route::get('/product/register', function(){
     return view('registproduct');
 });
 
-Route::get('project/search', function(){
+Route::get('/project/search', function(){
     return view('searchproject');
 });
+
+Route::get('/project/{id}', 'ProjectController@show');
+
+Route::get('/user/{id}','UserController@show');
 
 Auth::routes();
 

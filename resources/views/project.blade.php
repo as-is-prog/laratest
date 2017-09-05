@@ -5,22 +5,18 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>プロジェクト新規作成</h2></div>
+                <div class="panel-heading"><h2>{{$project->name}}</h2></div>
 
-                <div class="panel-body">
-                  <form action="/project/create" method="post">
-                  {{ csrf_field() }}
-                    <h4>プロジェクト名</h4>
-                      <input name="name" type="text"><br>
+                    <h4>プロジェクト作成者</h4>
+                    <span><a href="{{ '/user/'.$users[0]->id }}">{{ $users[0]->name }}</a></span>
                     <h4>プロジェクト画像</h4>
                       <input name="img" type="file"><br>
                     <h4>タグ (スペース区切りで複数入力)</h4>
                       <input name="tags" type="text"><br>
                     <h4>プロジェクト概要</h4>
-                      <textarea name="outline" rows="8" cols="80"></textarea>
+                    <p>{{$project->outline}}</p>
                     <br>
                     <br>
-                    <input type="submit" value="作成">
                   </form>
                 </div>
             </div>

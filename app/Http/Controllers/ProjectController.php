@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Project;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Project;
+use App\User;
 
 class ProjectController extends Controller
 {
@@ -25,24 +26,24 @@ class ProjectController extends Controller
      */
     public function create(Request $request)
     {
-      $name = $request->input('name');
-      $outline = $request->input('outline');
+        $name = $request->input('name');
+        $outline = $request->input('outline');
 
-      $project = new Project;
-      $project->createuserid = 0;
-      $project->imgurl = '';
-      $project->maintagid = 0;
-      $project->name = $name;
-      $project->outline = $outline;
+        $project = new Project;
+        $project->createuserid = Auth::User()->id;
+        $project->imgurl = '';
+        $project->maintagid = 0;
+        $project->name = $name;
+        $project->outline = $outline;
 
-      try{
-        $project->save();
-      }
-      catch(\Exception $e){
-         // do task when error
-         return $e->getMessage();   // insert query
-      }
-      return view('resultmessage', ['message' => $request->input('name')."プロジェクトを作成しました。", 'link' => 'home']);
+        try{
+            $project->save();
+        }
+        catch(\Exception $e){
+            // do task when error
+            return $e->getMessage();   // insert query
+        }
+        return view('resultmessage', ['message' => $request->input('name')."プロジェクトを作成しました。", 'link' => 'home']);
     }
 
     /**
@@ -64,7 +65,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::where('id','=',$id)->firstOrFail();
+        $users[] = User::where('id','=',$project->createuserid)->firstOrFail();
+        return view('project',['project' => $project, 'users' => $users]);
     }
 
     /**
