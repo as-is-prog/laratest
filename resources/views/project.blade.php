@@ -20,8 +20,8 @@
 
                         <h4>プロジェクト画像</h4>
                           <input name="img" type="file"><br>
-                          @if($project->joinedUsers()->exists())
-                            <h4>タグ (スペース区切りで複数表示)</h4>
+                          @if($project->tags()->exists())
+                            <h4>募集クリエイタータグ</h4>
                           @endif
                           <ul>
                               @foreach($project->tags as $tag)
