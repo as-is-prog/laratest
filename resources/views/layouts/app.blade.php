@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    @if(Request::secure())
+    @if(env('APP_DEBUG', false) == false )
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     @else
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -56,7 +56,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>　アーティスト</li>
+                                    <li>　クリエイター</li>
                                     <li><a href="/product/register">作品登録</a></li>
                                     <li><a href="/project/search">プロジェクト検索</a></li>
                                     <li>　プロデューサー</li>
@@ -86,7 +86,7 @@
     </div>
 
     <!-- Scripts -->
-    @if(Request::secure())
+    @if(env('APP_DEBUG', false) == false )
         <script src="{{ secure_asset('js/app.js') }}"></script>
     @else
         <script src="{{ asset('js/app.js') }}"></script>
