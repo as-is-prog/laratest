@@ -47,8 +47,13 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            @if(env('APP_DEBUG', false) == false )
+                                <li><a href="{{ secure_url(route('login')) }}">Login</a></li>
+                                <li><a href="{{ secure_url(route('register')) }}">Register</a></li>
+                            @else
+                                <li><a href="{{ route('login') }}">Login</a></li>
+                                <li><a href="{{ route('register') }}">Register</a></li>
+                            @endif
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -64,15 +69,27 @@
                                     <li><a href="/user/search">ユーザー検索</a></li>
                                     <li>　システム</li>
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        @if(env('APP_DEBUG', false) == false )
+                                        <a href="{{ secure_url(route('logout')) }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ secure_url(route('logout')) }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                        @else
+                                        <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                        @endif
                                     </li>
                                 </ul>
                             </li>
