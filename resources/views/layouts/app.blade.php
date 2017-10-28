@@ -11,7 +11,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @if(Request::secure())
+        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    @else
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @endif
 </head>
 <body>
     <div id="app">
@@ -82,6 +86,10 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @if(Request::secure())
+        <script src="{{ secure_asset('js/app.js') }}"></script>
+    @else
+        <script src="{{ asset('js/app.js') }}"></script>
+    @endif
 </body>
 </html>
