@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
+if (env('APP_DEBUG', false) == false) {
+    URL::forceScheme('https');
+}
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
