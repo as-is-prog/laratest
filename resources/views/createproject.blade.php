@@ -15,7 +15,9 @@
                     <h4>プロジェクト画像</h4>
                       <input name="img" type="file"><br>
                     <h4>タグ (スペース区切りで複数入力)</h4>
-                      <input name="tags" type="text"><br>
+                      @foreach($tags as $tag)
+                        <input type="checkbox" name="tags[]" value="{{$tag->id}}"> {{$tag->name}}
+                      @endforeach
                     <h4>プロジェクト概要</h4>
                       <textarea name="outline" rows="8" cols="80"></textarea>
                     <br>

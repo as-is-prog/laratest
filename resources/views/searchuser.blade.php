@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>プロジェクト検索</h2></div>
+                <div class="panel-heading"><h2>ユーザー検索</h2></div>
 
                 <div class="panel-body">
                     <form action="/api/project/search" method="post">
@@ -21,13 +21,13 @@
                     </form>
 
 
-                    @if(isset($projects))
+                    @if(isset($users))
                     <h2>検索結果</h2>
-                    @foreach ($projects as $project)
+                    @foreach ($users as $user)
                         <ul>
                             <li>
-                                <h4><a href="{{ '/project/'.$project->id }}">{{ $project->name }}</a></h4>
-                                <p>{{ $project->outline }}</p>
+                                <h4><a href="{{ '/user/'.$user->id }}">{{ $user->name }}</a></h4>
+                                <p>{{ $user->outline }}</p>
                             </li>
                         </ul>
                     @endforeach

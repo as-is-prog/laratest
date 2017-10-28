@@ -21,20 +21,32 @@ Route::get('link/list', function(){
 });
 
 Route::get('/project/create', function(){
-    return view('createproject');
+    $tags = \App\Tag::all();
+    return view('createproject',['tags' => $tags]);
 });
 
 Route::post('/project/create', 'ProjectController@create');
+
+Route::post('/project/{id}/join', 'ProjectController@join');
 
 Route::get('/product/register', function(){
     return view('registproduct');
 });
 
 Route::get('/project/search', function(){
-    return view('searchproject');
+    $tags = \App\Tag::all();
+
+    return view('searchproject',['tags' => $tags]);
 });
 
 Route::get('/project/{id}', 'ProjectController@show');
+
+Route::get('/project/search', function(){
+    $tags = \App\Tag::all();
+
+    return view('searchuser',['tags' => $tags]);
+});
+
 
 Route::get('/user/{id}','UserController@show');
 

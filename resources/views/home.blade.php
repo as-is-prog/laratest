@@ -16,6 +16,19 @@
                       <li><a href="/project/create">プロジェクト新規作成</a></li>
                       <li><a href="/project/search">プロジェクト検索</a></li>
                     </ul>
+                    <br>
+                    <h4>あなたのプロジェクト</h4>
+                    <ul>
+                        @foreach(Auth::user()->myProjects as $project)
+                            <li><a href="/project/{{$project->id}}">{{$project->name}}</a></li>
+                        @endforeach
+                    </ul>
+                    <h4>参加中のプロジェクト</h4>
+                    <ul>
+                        @foreach(Auth::user()->joiningProjects as $project)
+                            <li><a href="/project/{{$project->id}}">{{$project->name}}</a></li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

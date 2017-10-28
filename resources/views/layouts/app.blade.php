@@ -52,6 +52,13 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li>　アーティスト</li>
+                                    <li><a href="/product/register">作品登録</a></li>
+                                    <li><a href="/project/search">プロジェクト検索</a></li>
+                                    <li>　プロデューサー</li>
+                                    <li><a href="/project/create">プロジェクト作成</a></li>
+                                    <li><a href="/user/search">ユーザー検索</a></li>
+                                    <li>　システム</li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

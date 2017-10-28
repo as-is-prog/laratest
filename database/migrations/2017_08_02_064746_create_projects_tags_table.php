@@ -14,10 +14,14 @@ class CreateProjectsTagsTable extends Migration
     public function up()
     {
         Schema::create('projects_tags', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('projectid');
-            $table->integer('tagid');
+            $table->integer('projectid')->unsigned();
+            $table->integer('tagid')->unsigned();
             $table->timestamps();
+
+            // constraints
+            $table->primary(['projectid', 'tagid']);
+            $table->foreign('projectid')->references('id')->on('projects');
+            $table->foreign('tagid')->references('id')->on('tags');
         });
     }
 

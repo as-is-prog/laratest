@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function myProjects(){
+        return $this->hasMany('App\Project','userid');
+    }
+
+    public function joiningProjects(){
+        return $this->belongsToMany('App\Project','projects_users','userid','projectid');
+    }
 }
