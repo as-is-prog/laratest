@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectsTable extends Migration
+class CreateMarksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('marks', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('projectid')->unsigned();
             $table->integer('userid')->unsigned();
-            $table->string('name');
-            $table->string('imgurl')->nullable();
-            $table->boolean('terminated')->default(false);
-            $table->string('outline');
+            $table->integer('markerid')->unsigned();
+            $table->integer('score');
+            $table->string('comment');
             $table->timestamps();
 
+            $table->foreign('projectid')->references('id')->on('projects');
             $table->foreign('userid')->references('id')->on('users');
+            $table->foreign('markerid')->references('id')->on('users');
         });
     }
 
@@ -33,6 +35,6 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('marks');
     }
 }

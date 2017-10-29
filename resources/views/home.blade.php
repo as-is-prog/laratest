@@ -19,15 +19,42 @@
                     <br>
                     <h4>あなたのプロジェクト</h4>
                     <ul>
-                        @foreach(Auth::user()->myProjects as $project)
-                            <li><a href="/project/{{$project->id}}">{{$project->name}}</a></li>
-                        @endforeach
+                        <h5>実施中</h5>
+                        @if(Auth::user()->myProjects->where('terminated','=',false)->isEmpty())
+                            <li>無し</li>
+                        @else
+                            @foreach(Auth::user()->myProjects->where('terminated','=',false) as $project)
+                                <li><a href="/project/{{$project->id}}">{{$project->name}}</a></li>
+                            @endforeach
+                        @endif
+                        <h5>終了済み</h5>
+                        @if(Auth::user()->myProjects->where('terminated','=',true)->isEmpty())
+                            <li>無し</li>
+                        @else
+                            @foreach(Auth::user()->myProjects->where('terminated','=',true) as $project)
+                                <li><a href="/project/{{$project->id}}">{{$project->name}}</a></li>
+                            @endforeach
+                        @endif
                     </ul>
-                    <h4>参加中のプロジェクト</h4>
+
+                    <h4>参加したプロジェクト</h4>
                     <ul>
-                        @foreach(Auth::user()->joiningProjects as $project)
-                            <li><a href="/project/{{$project->id}}">{{$project->name}}</a></li>
-                        @endforeach
+                        <h5>実施中</h5>
+                        @if(Auth::user()->joiningProjects->where('terminated','=',false)->isEmpty())
+                            <li>無し</li>
+                        @else
+                            @foreach(Auth::user()->joiningProjects->where('terminated','=',false) as $project)
+                                <li><a href="/project/{{$project->id}}">{{$project->name}}</a></li>
+                            @endforeach
+                        @endif
+                        <h5>終了済み</h5>
+                        @if(Auth::user()->joiningProjects->where('terminated','=',true)->isEmpty())
+                            <li>無し</li>
+                        @else
+                            @foreach(Auth::user()->joiningProjects->where('terminated','=',true) as $project)
+                                <li><a href="/project/{{$project->id}}">{{$project->name}}</a></li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>

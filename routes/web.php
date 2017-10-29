@@ -27,11 +27,13 @@ Route::get('link/list', function(){
 Route::get('/project/create', function(){
     $tags = \App\Tag::all();
     return view('createproject',['tags' => $tags]);
-});
+})->middleware('auth');
 
 Route::post('/project/create', 'ProjectController@create');
 
 Route::post('/project/{id}/join', 'ProjectController@join');
+
+Route::post('/project/{id}/terminate', 'ProjectController@terminate');
 
 Route::get('/product/register', function(){
     return view('registproduct');
@@ -45,7 +47,7 @@ Route::get('/project/search', function(){
 
 Route::get('/project/{id}', 'ProjectController@show');
 
-Route::get('/project/search', function(){
+Route::get('/user/search', function(){
     $tags = \App\Tag::all();
 
     return view('searchuser',['tags' => $tags]);

@@ -11,11 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    @if(env('APP_DEBUG', false) == false )
-        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    @else
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @endif
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('rateit/rateit.css') }}">
 </head>
 <body>
     <div id="app">
@@ -103,10 +100,14 @@
     </div>
 
     <!-- Scripts -->
-    @if(env('APP_DEBUG', false) == false )
-        <script src="{{ secure_asset('js/app.js') }}"></script>
-    @else
-        <script src="{{ asset('js/app.js') }}"></script>
-    @endif
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('rateit/jquery.rateit.js') }}"></script>
+    <script>
+        $(".rateit").rateit({
+            min: 0,
+            max: 1,
+            step: 0.5,
+        });
+    </script>
 </body>
 </html>

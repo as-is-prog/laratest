@@ -20,7 +20,11 @@ class CreateTagsTable extends Migration
             $table->timestamps();
         });
 
-        Tag::create(['name' => '']);
+        Tag::create(['name' => 'tag1']);
+        Tag::create(['name' => 'tag2']);
+        Tag::create(['name' => 'tag3']);
+        Tag::create(['name' => 'tag4']);
+        Tag::create(['name' => 'tag5']);
     }
 
     /**

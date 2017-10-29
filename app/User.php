@@ -34,4 +34,5 @@ class User extends Authenticatable
     public function joiningProjects(){
         return $this->belongsToMany('App\Project','projects_users','userid','projectid');
     }
+
 }

@@ -35,13 +35,22 @@
                     <form method="post" action="/project/{{$project->id}}/join">
                         {{csrf_field()}}
                         <h4>プロジェクトに参加する</h4>
-                        @if($project->createdUser->id == Auth::user()->id || $project->joinedUsers()->where('id',Auth::user()->id)->exists())
-                            <button disabled="disabled">参加済み</button>
+                        @if(Auth::check() && ($project->createdUser->id == Auth::user()->id || $project->joinedUsers()->where('id',Auth::user()->id)->exists()) )
+                            <button disabled="disabled">あなたは既にこのプロジェクトに参加しています</button>
                         @else
                             <input type="submit" value="参加">
                         @endif
                     </form>
-                </div>
+                    <form method="post" action="/project/{{$project->id}}/terminate">
+                        {{csrf_field()}}
+                        <h4>プロジェクトを終了する</h4>
+                        @if($project->terminated)
+                            <button disabled="disabled">終了済み</button>
+                        @else
+                            <input type="submit" value="プロジェクトを終了して評価に移る">
+                        @endif
+                    </form>
+            </div>
             </div>
         </div>
     </div>

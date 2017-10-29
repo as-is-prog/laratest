@@ -32,7 +32,6 @@ class ProjectController extends Controller
 
         $project = Project::create([
             'userid' => Auth::User()->id,
-            'maintagid' => 0,
             'name' => $name,
             'outline' => $outline
         ]);
@@ -47,6 +46,10 @@ class ProjectController extends Controller
     public function join($id){
         $project = Project::where('id','=',$id)->firstOrFail();
 
+        if(Auth::check() == false){
+            return view('resultmessage', ['message' => 'ログインしていないためプロジェクトに参加できません', 'link' => 'project/'.$id]);
+        }
+
         if($project->createdUser->id == Auth::user()->id || $project->joinedUsers()->where('id',Auth::user()->id)->exists()){
             return view('resultmessage', ['message' => "あなたは既に".$project->name."プロジェクトに参加しています。", 'link' => 'project/'.$id]);
         }
@@ -54,6 +57,19 @@ class ProjectController extends Controller
         $project->joinedUsers()->attach(Auth::user()->id);
 
         return view('resultmessage', ['message' => $project->name."プロジェクトに参加しました。", 'link' => 'home']);
+    }
+
+    public function terminate($id){
+        $project = Project::where('id','=',$id)->firstOrFail();
+
+        if(Auth::check() == false || $project->createdUser->id != Auth::user()->id){
+            return view('resultmessage', ['message' => 'ERROR:あなたはこのプロジェクトを終了する権限がありません。', 'link' => 'project/'.$id]);
+        }
+
+        $project->terminated = true;
+        $project->save();
+
+        return view('resultmessage', ['message' => $project->name."プロジェクトを終了しました。<br>ぜひメンバーの評価をお願いいたします。", 'link' => 'project/'.$id ]);
     }
 
     /**
