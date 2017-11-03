@@ -32,6 +32,7 @@
                         <p>{{$project->outline}}</p>
                         <br>
                         <br>
+                    @if($project->terminated == false)
                     <form method="post" action="/project/{{$project->id}}/join">
                         {{csrf_field()}}
                         <h4>プロジェクトに参加する</h4>
@@ -41,6 +42,8 @@
                             <input type="submit" value="参加">
                         @endif
                     </form>
+                    @endif
+                    @if(Auth::check() && $project->createdUser->id == Auth::user()->id)
                     <form method="post" action="/project/{{$project->id}}/terminate">
                         {{csrf_field()}}
                         <h4>プロジェクトを終了する</h4>
@@ -50,6 +53,7 @@
                             <input type="submit" value="プロジェクトを終了して評価に移る">
                         @endif
                     </form>
+                    @endif
             </div>
             </div>
         </div>
